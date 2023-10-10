@@ -1,6 +1,7 @@
 ﻿Console.Title = "TamaGucci";
 
-store ica = new();
+Store ica = new Store();
+List<Tamagotchi> kidList = new();
 Tamagotchi kid = new();
 bool isinStore = false;
 string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
@@ -15,12 +16,17 @@ List<Action> eventList = new()
     kid.DressUp,
     kid.Exhibition
     };
-Console.WriteLine("New Game or Load Game? answer 1 or 2");
-string NoL = Console.ReadLine();
-if (NoL == "2")
+
+if (File.Exists(filePath))
 {
-    loadGame();
+    Console.WriteLine("New Game or Load Game? answer 1 or 2");
+    string NoL = Console.ReadLine();
+    if (NoL == "2")
+    {
+        loadGame();
+    }
 }
+
 if (kid.name == null)
 {
     Console.Clear();
@@ -35,7 +41,7 @@ while (kid.isAlive)
     {
         Console.Clear();
 
-        Console.WriteLine($"What do you wish to do? 1.Teach, 2.Talk, 3.Feed, 4.go to the store, 5.Check your Inventory, 6.Dress up {kid.name}, 7.Enter an Exhibition?. Answer with a number!!");
+        Console.WriteLine($"What do you wish to do? 1.Teach, 2.Talk, 3.Feed, 4.go to the Store,\n5.Check your Inventory, 6.Dress up {kid.name}, 7.Enter an Exhibition?. Answer with a number!!");
         string answer = Console.ReadLine();
         int answerInt;
         int.TryParse(answer, out answerInt);

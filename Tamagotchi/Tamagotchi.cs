@@ -6,9 +6,9 @@
     int ExScore = 5;
     public int money = 100;
     List<string> words = new();
-    public List<store> ownedFood = new();
-    public List<store> ownedItems = new();
-    public List<store> dressed = new();
+    public List<Store> ownedFood = new();
+    public List<Store> ownedItems = new();
+    public List<Store> dressed = new();
     public bool isAlive = true;
     Random gen = new();
     public string name;
@@ -154,7 +154,7 @@
         setExScore();
         int win;
         int diff;
-        Console.WriteLine($"At What Grade Would You Like to Compete In? 1 (Avg. Exh.points: 15, 1st price: $30), 2 (AVg. Exh.points: 30, 1st price: $50), or 3 (Avg. Exh.points: 60, 1st price: $100), {name} has {ExScore} in Exh.ponits");
+        Console.WriteLine($"At What Grade Would You Like to Compete In? 1 (Avg. Exh.points: 15, 1st price: $30),\n2 (AVg. Exh.points: 30, 1st price: $50),\nor 3 (Avg. Exh.points: 60, 1st price: $100),\n{name} has {ExScore} in Exh.ponits");
         string DiffChoise = Console.ReadLine();
         int DiC;
         int.TryParse(DiffChoise, out DiC);

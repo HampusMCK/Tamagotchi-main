@@ -1,10 +1,10 @@
-class store
+class Store
 {
     public int ItemPrice;
     public string ItemName;
     public int HungerDecrease;
     public int ExhibitionScore;
-    public List<store> StockItems = new();
+    public List<Store> StockItems = new();
 
     public void addItems()
     {
