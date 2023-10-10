@@ -1,8 +1,10 @@
 ﻿Console.Title = "TamaGucci";
 
-Tamagotchi kid = new();
 store ica = new();
+Tamagotchi kid = new();
 bool isinStore = false;
+string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+string filePath = Path.Combine(path, "saveFile.txt");
 List<Action> eventList = new()
     {
     kid.Teach,
@@ -13,9 +15,18 @@ List<Action> eventList = new()
     kid.DressUp,
     kid.Exhibition
     };
-
-Console.WriteLine("Name Your TamaGucci!");
-kid.name = Console.ReadLine();
+Console.WriteLine("New Game or Load Game? answer 1 or 2");
+string NoL = Console.ReadLine();
+if (NoL == "2")
+{
+    loadGame();
+}
+if (kid.name == null)
+{
+    Console.Clear();
+    Console.WriteLine("Name Your TamaGucci!");
+    kid.name = Console.ReadLine();
+}
 ica.addItems();
 while (kid.isAlive)
 {
@@ -39,6 +50,7 @@ while (kid.isAlive)
         }
         kid.Tick();
         Console.ReadLine();
+        saveGame();
     }
 
     while (kid.isAlive && isinStore)
@@ -58,14 +70,49 @@ while (kid.isAlive)
             ica.PrintItem();
             buyItems();
         }
+        saveGame();
     }
-
+    saveGame();
 }
 
 Console.WriteLine($"{kid.name} Died");
 Console.ReadLine();
 
 
+
+
+
+void saveGame()
+{
+    var serializedObject = Newtonsoft.Json.JsonConvert.SerializeObject(kid, Newtonsoft.Json.Formatting.Indented);
+
+
+    using (StreamWriter sw = new StreamWriter(filePath))
+    {
+        sw.Write(serializedObject);
+    }
+
+
+    string content = null;
+    using (StreamReader sr = new StreamReader(filePath))
+    {
+        content = sr.ReadToEnd();
+    }
+
+    var kidReturned = Newtonsoft.Json.JsonConvert.DeserializeObject(content);
+}
+
+void loadGame()
+{
+    string content = null;
+    using (StreamReader sr = new StreamReader(filePath))
+    {
+        content = sr.ReadToEnd();
+    }
+
+    var kidReturned = Newtonsoft.Json.JsonConvert.DeserializeObject<Tamagotchi>(content);
+    kid = kidReturned;
+}
 
 void GoToStore()
 {
