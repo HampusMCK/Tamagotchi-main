@@ -72,11 +72,15 @@ while (kid.isAlive)
             ica.PrintFood();
             buyFood();
         }
-        if (StoreChoise == "2" || StoreChoise == "items")
+        else if (StoreChoise == "2" || StoreChoise == "items")
         {
             Console.WriteLine($"What do you wish to buy? You have ${kid.money}");
             ica.PrintItem();
             buyItems();
+        }
+        else
+        {
+            isinStore = false;
         }
         saveGame();
     }
@@ -165,6 +169,10 @@ void buyFood()
                 }
             }
         }
+        else
+        {
+            isinStore = false;
+        }
     }
 }
 
@@ -202,6 +210,10 @@ void buyItems()
                     isinStore = false;
                 }
             }
+        }
+        else
+        {
+            isinStore = false;
         }
     }
 }
